@@ -6,17 +6,29 @@ class Dashboard:
         self.console = Console()
 
     def display_failing_jobs(self, jobs):
+        """
+        Displays the failing Jenkins jobs in a table with indexing starting from 1.
+        """
         table = Table(title="Failing Jenkins Jobs")
+        table.add_column("Index", justify="center")
         table.add_column("Job Name", justify="left")
         table.add_column("Instance", justify="left")
         table.add_column("Last Build URL", justify="left")
 
-        for job in jobs:
-            table.add_row(job['name'], job['instance'], job['last_build'] or "N/A")
+        for idx, job in enumerate(jobs, start=1):  # Start index from 1
+            table.add_row(
+                str(idx),
+                job['name'],
+                job['instance'],
+                job['last_build'] or "N/A"
+            )
 
         self.console.print(table)
 
     def display_service_status(self, services):
+        """
+        Displays the health status of services in a table.
+        """
         table = Table(title="Service Health Status")
         table.add_column("Service Name", justify="left")
         table.add_column("Status", justify="center")
