@@ -1,0 +1,26 @@
+jenkins:
+  - name: Jenkins Instance 1
+    url: http://jenkins1.example.com
+    username: jenkins_user
+    api_token: jenkins_api_token_1
+  - name: Jenkins Instance 2
+    url: http://jenkins2.example.com
+    username: jenkins_user
+    api_token: jenkins_api_token_2
+
+jira:
+  url: https://jira.example.com
+  username: jira_user
+  api_token: jira_api_token
+  project_key: PROJECT
+  issue_template:
+    summary_pattern: "Failure in {job_name}"
+    description_template: |
+      Job {job_name} failed at {timestamp}.
+      Logs: {logs_url}
+
+services:
+  - name: Service 1
+    url: http://service1.example.com/health
+  - name: Service 2
+    url: http://service2.example.com/ping
