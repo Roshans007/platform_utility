@@ -1,0 +1,5 @@
+jenkins
+jira
+requests
+pyyaml
+rich
