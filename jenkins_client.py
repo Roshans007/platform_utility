@@ -12,12 +12,15 @@ class JenkinsClient:
             self.clients.append({'name': instance['name'], 'client': client})
 
     def get_failing_jobs(self):
+        """
+        Fetches failing jobs from all configured Jenkins instances.
+        """
         failing_jobs = []
         for instance in self.clients:
             client = instance['client']
             jobs = client.get_jobs()
             for job in jobs:
-                if job['color'] == 'red':
+                if 'red' in job['color']:
                     job_info = client.get_job_info(job['name'])
                     failing_jobs.append({
                         'name': job['name'],
@@ -27,6 +30,9 @@ class JenkinsClient:
         return failing_jobs
 
     def get_job_logs(self, instance_name, job_name):
+        """
+        Fetches logs of the last build of the specified job.
+        """
         for instance in self.clients:
             if instance['name'] == instance_name:
                 client = instance['client']
